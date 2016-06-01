@@ -3,6 +3,7 @@ package net.smartcosmos.dao.relationships;
 import net.smartcosmos.dto.relationships.RelationshipCreate;
 import net.smartcosmos.dto.relationships.RelationshipLookupSpecific;
 import net.smartcosmos.dto.relationships.RelationshipResponse;
+import net.smartcosmos.dto.relationships.RelationshipUpdateMoniker;
 
 import javax.validation.ConstraintViolationException;
 import java.util.Optional;
@@ -52,6 +53,18 @@ public interface RelationshipDao {
      * @throws IllegalArgumentException if the relationship references by URN does not exist.
      */
     void delete(String accountUrn, String urn) throws IllegalArgumentException;
+
+    /**
+     * Updates the moniker of a relationship
+     *
+     * @param accountUrn
+     * @param relationshipUpdateMoniker
+     * @return an {@link RelationshipResponse} instance for the created object
+     * @throws ConstraintViolationException if the {@link RelationshipCreate} violates constraints enforced by the persistence service
+     * @throws IllegalArgumentException if the relationship references by URN does not exist.*
+     */
+    RelationshipResponse updateMoniker(String accountUrn, RelationshipUpdateMoniker relationshipUpdateMoniker)
+        throws ConstraintViolationException, IllegalArgumentException;
 
     // TODO: add Look Up All Relationships Between Entities
 
