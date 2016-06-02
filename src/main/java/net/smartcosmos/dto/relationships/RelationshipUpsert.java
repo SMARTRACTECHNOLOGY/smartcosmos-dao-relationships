@@ -12,30 +12,38 @@ import java.beans.ConstructorProperties;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @AllArgsConstructor
-public class RelationshipLookupSpecific {
+public class RelationshipUpsert {
+
+    private static final int VERSION = 1;
+
     @Setter(AccessLevel.NONE)
-    private String version = "1";
+    private int version = VERSION; // just in case there is a default constructor sometime
 
     private String entityReferenceType;
     private String referenceUrn;
     private String type;
     private String relatedEntityReferenceType;
     private String relatedReferenceUrn;
+    private String moniker;
 
     @Builder
     @ConstructorProperties({"entityReferenceType", "referenceUrn", "type",
-        "relatedEntityReferenceType", "relatedReferenceUrn"})
-    public RelationshipLookupSpecific(
-        String entityReferenceType,
-        String referenceUrn,
-        String type,
-        String relatedEntityReferenceType,
-        String relatedReferenceUrn)
+            "relatedEntityReferenceType", "relatedReferenceUrn", "moniker"})
+    public RelationshipUpsert(
+            String entityReferenceType,
+            String referenceUrn,
+            String type,
+            String relatedEntityReferenceType,
+            String relatedReferenceUrn,
+            String moniker)
     {
         this.entityReferenceType = entityReferenceType;
         this.referenceUrn = referenceUrn;
         this.type = type;
         this.relatedEntityReferenceType = relatedEntityReferenceType;
         this.relatedReferenceUrn = relatedReferenceUrn;
+        this.moniker = moniker;
+
+        this.version = VERSION;
     }
 }

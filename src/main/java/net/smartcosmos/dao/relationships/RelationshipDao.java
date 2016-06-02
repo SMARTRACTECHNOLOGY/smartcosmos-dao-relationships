@@ -1,11 +1,10 @@
 package net.smartcosmos.dao.relationships;
 
-import net.smartcosmos.dto.relationships.RelationshipCreate;
-import net.smartcosmos.dto.relationships.RelationshipLookupSpecific;
 import net.smartcosmos.dto.relationships.RelationshipResponse;
-import net.smartcosmos.dto.relationships.RelationshipUpdateMoniker;
+import net.smartcosmos.dto.relationships.RelationshipUpsert;
 
 import javax.validation.ConstraintViolationException;
+import java.util.List;
 import java.util.Optional;
 
 public interface RelationshipDao {
@@ -14,13 +13,13 @@ public interface RelationshipDao {
      * Creates a relationship in the realm of a given account.
      *
      * @param accountUrn the account URN
-     * @param relationshipCreate the object to create
+     * @param upsertRelationship the relationship to upsert
      * @return an {@link RelationshipResponse} instance for the created object
-     * @throws ConstraintViolationException if the {@link RelationshipCreate} violates constraints enforced by the persistence service
+     * @throws ConstraintViolationException if the {@link RelationshipUpsert} violates constraints enforced by the persistence service
      */
-    RelationshipResponse create(
+    RelationshipResponse upsert(
             String accountUrn,
-            RelationshipCreate relationshipCreate)
+            RelationshipUpsert upsertRelationship)
         throws ConstraintViolationException;
 
      /**
@@ -28,47 +27,96 @@ public interface RelationshipDao {
      *
      * @param accountUrn the account URN
      * @param urn the relationship's system-assigned URN
-     * @return the {@link RelationshipResponse} instance for the retrieved object or {@code empty} if the object does not exist
+     * @return the {@link RelationshipResponse} instance for the retrieved relationship or {@code empty} if the relationship does not exist
      */
     Optional<RelationshipResponse> findByUrn(String accountUrn, String urn);
 
     /**
-     * Finds a relationship matching specified entity, related entity and type.
+     * Finds a specific relationship between entities with a specified type in the realm of a given account.
      *
-     * @param accountUrn
-     * @param relationshipLookupSpecific
-     * @return
-     * @throws ConstraintViolationException if the {@link RelationshipLookupSpecific} violates constraints enforced by the persistence service
+     * @param accountUrn the account URN
+     * @param entityReferenceType the entity reference type
+     * @param referenceUrn the reference entity's system-assigned URN
+     * @param relatedEntityReferenceType the entity reference type of the related entity
+     * @param relatedReferenceUrn the related reference entity's system-assigned URN
+     * @param type the relationship type
+     * @return the {@link RelationshipResponse} instance for the retrieved relationship or {@code empty} if the relationship does not exist
      */
     Optional<RelationshipResponse> findSpecific(
             String accountUrn,
-            RelationshipLookupSpecific relationshipLookupSpecific)
-        throws ConstraintViolationException;
+            String entityReferenceType,
+            String referenceUrn,
+            String relatedEntityReferenceType,
+            String relatedReferenceUrn,
+            String type);
 
     /**
      * Deletes a relationship matching a specified URN in the realm of a given account.
      *
      * @param accountUrn the account URN
      * @param urn the relationship's system-assigned URN
-     * @throws IllegalArgumentException if the relationship references by URN does not exist.
      */
-    void delete(String accountUrn, String urn) throws IllegalArgumentException;
+    void delete(String accountUrn, String urn);
+
 
     /**
-     * Updates the moniker of a relationship
+     * Finds all relationships between specified entities in the realm of a given account.
      *
-     * @param accountUrn
-     * @param relationshipUpdateMoniker
-     * @return an {@link RelationshipResponse} instance for the created object
-     * @throws ConstraintViolationException if the {@link RelationshipCreate} violates constraints enforced by the persistence service
-     * @throws IllegalArgumentException if the relationship references by URN does not exist.*
+     * @param accountUrn the account URN
+     * @param entityReferenceType the entity reference type
+     * @param referenceUrn the reference entity's system-assigned URN
+     * @param relatedEntityReferenceType the entity reference type of the related entity
+     * @param relatedReferenceUrn the related reference entity's system-assigned URN
+     * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
-    RelationshipResponse updateMoniker(String accountUrn, RelationshipUpdateMoniker relationshipUpdateMoniker)
-        throws ConstraintViolationException, IllegalArgumentException;
+    List<RelationshipResponse> findBetweenEntities(
+        String accountUrn,
+        String entityReferenceType,
+        String referenceUrn,
+        String relatedEntityReferenceType,
+        String relatedReferenceUrn);
 
-    // TODO: add Look Up All Relationships Between Entities
+    /**
+     * Finds all relationships for a given reference entity matching a specified type in the realm of a given account.
+     *
+     * @param accountUrn the account URN
+     * @param entityReferenceType the entity reference type
+     * @param referenceUrn the reference entity's system-assigned URN
+     * @param type the relationship type
+     * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
+     */
+    List<RelationshipResponse> findByType(
+        String accountUrn,
+        String entityReferenceType,
+        String referenceUrn,
+        String type);
 
-    // TODO: add Look Up Relationships By Type
+    /**
+     * Finds all relationships for a given reference entity in the realm of a given account.
+     *
+     * @param accountUrn the account URN
+     * @param entityReferenceType the entity reference type
+     * @param referenceUrn the reference entity's system-assigned URN
+     * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
+     */
+    List<RelationshipResponse> findAll(
+        String accountUrn,
+        String entityReferenceType,
+        String referenceUrn);
 
-    // TODO: add Look Up All Relationships
+    /**
+     * Finds all reflexive relationships for a given entity in the realm of a given account.
+     * <p></p>
+     * A matching set of relationship contains two bidirectional relationships of the same type between reference
+     * entity and related reference entity respectively.
+     *
+     * @param accountUrn the account URN
+     * @param entityReferenceType the entity reference type
+     * @param referenceUrn the reference entity's system-assigned URN
+     * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
+     */
+    List<RelationshipResponse> findAllReflexive(
+        String accountUrn,
+        String entityReferenceType,
+        String referenceUrn);
 }
