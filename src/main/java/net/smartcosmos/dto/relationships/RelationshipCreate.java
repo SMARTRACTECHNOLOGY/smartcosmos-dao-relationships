@@ -17,7 +17,7 @@ public class RelationshipCreate {
     private static final int VERSION = 1;
 
     @Setter(AccessLevel.NONE)
-    private int version = VERSION; // just in
+    private int version = VERSION; // just in case there is a default constructor sometime
 
     private String entityReferenceType;
     private String referenceUrn;
