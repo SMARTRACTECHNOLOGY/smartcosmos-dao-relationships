@@ -30,10 +30,11 @@ public class RelationshipResponse {
     private final String accountUrn;
     private final Long lastModifiedTimestamp;
     private final String moniker;
+    private final Boolean reciprocal;
 
     @Builder
-    @ConstructorProperties({"urn", "entityReferenceType", "referenceUrn", "type", "relatedEntityReferenceType", "relatedReferenceUrn", "accountUrn", "lastModifiedTimestamp", "moniker"})
-    public RelationshipResponse(String urn, String entityReferenceType, String referenceUrn, String type, String relatedEntityReferenceType, String relatedReferenceUrn, String accountUrn, Long lastModifiedTimestamp, String moniker) {
+    @ConstructorProperties({"urn", "entityReferenceType", "referenceUrn", "type", "relatedEntityReferenceType", "relatedReferenceUrn", "accountUrn", "lastModifiedTimestamp", "moniker", "reciprocal"})
+    public RelationshipResponse(String urn, String entityReferenceType, String referenceUrn, String type, String relatedEntityReferenceType, String relatedReferenceUrn, String accountUrn, Long lastModifiedTimestamp, String moniker, Boolean reciprocal) {
         this.urn = urn;
         this.entityReferenceType = entityReferenceType;
         this.referenceUrn = referenceUrn;
@@ -43,6 +44,7 @@ public class RelationshipResponse {
         this.accountUrn = accountUrn;
         this.lastModifiedTimestamp = lastModifiedTimestamp;
         this.moniker = moniker;
+        this.reciprocal = reciprocal;
 
         this.version = VERSION;
     }
