@@ -93,6 +93,21 @@ public interface RelationshipDao {
         String type);
 
     /**
+     * Finds all relationships related to a given reference entity matching a specified type in the realm of a given account.
+     *
+     * @param accountUrn the account URN
+     * @param relatedEntityReferenceType the related entity reference type
+     * @param relatedReferenceUrn the related reference entity's system-assigned URN
+     * @param type the relationship type
+     * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
+     */
+    List<RelationshipResponse> findByTypeReverse(
+        String accountUrn,
+        String relatedEntityReferenceType,
+        String relatedReferenceUrn,
+        String type);
+
+    /**
      * Finds all relationships for a given reference entity in the realm of a given account.
      *
      * @param accountUrn the account URN
