@@ -13,8 +13,11 @@ import java.beans.ConstructorProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @AllArgsConstructor
 public class RelationshipCreate {
+
+    private static final int VERSION = 1;
+
     @Setter(AccessLevel.NONE)
-    private String version = "1";
+    private int version = VERSION; // just in
 
     private String entityReferenceType;
     private String referenceUrn;
@@ -40,5 +43,7 @@ public class RelationshipCreate {
         this.relatedEntityReferenceType = relatedEntityReferenceType;
         this.relatedReferenceUrn = relatedReferenceUrn;
         this.moniker = moniker;
+
+        this.version = VERSION;
     }
 }
