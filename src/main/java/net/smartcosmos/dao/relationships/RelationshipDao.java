@@ -61,10 +61,9 @@ public interface RelationshipDao {
      * @param relationshipUpdateMoniker
      * @return an {@link RelationshipResponse} instance for the created object
      * @throws ConstraintViolationException if the {@link RelationshipCreate} violates constraints enforced by the persistence service
-     * @throws IllegalArgumentException if the relationship references by URN does not exist.*
      */
-    RelationshipResponse updateMoniker(String accountUrn, RelationshipUpdateMoniker relationshipUpdateMoniker)
-        throws ConstraintViolationException, IllegalArgumentException;
+    Optional<RelationshipResponse> update(String accountUrn, RelationshipUpdateMoniker relationshipUpdateMoniker)
+        throws ConstraintViolationException;
 
     // TODO: add Look Up All Relationships Between Entities
 
