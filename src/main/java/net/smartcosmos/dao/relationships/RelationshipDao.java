@@ -55,9 +55,9 @@ public interface RelationshipDao {
      *
      * @param accountUrn the account URN
      * @param urn the relationship's system-assigned URN
-     * @return an {@link RelationshipResponse} instance for the deleted object
+     * @return a list of {@link RelationshipResponse} instances for the deleted relationship entities
      */
-    Optional<RelationshipResponse> delete(String accountUrn, String urn);
+    List<RelationshipResponse> delete(String accountUrn, String urn);
 
 
     /**
