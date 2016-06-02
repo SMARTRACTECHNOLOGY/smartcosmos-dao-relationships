@@ -17,7 +17,7 @@ public interface RelationshipDao {
      * @return an {@link RelationshipResponse} instance for the created object
      * @throws ConstraintViolationException if the {@link RelationshipUpsert} violates constraints enforced by the persistence service
      */
-    RelationshipResponse upsert(
+    Optional<RelationshipResponse> upsert(
             String accountUrn,
             RelationshipUpsert upsertRelationship)
         throws ConstraintViolationException;
