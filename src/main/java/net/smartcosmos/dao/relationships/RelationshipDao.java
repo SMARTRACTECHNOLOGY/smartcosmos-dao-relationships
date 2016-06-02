@@ -1,9 +1,8 @@
 package net.smartcosmos.dao.relationships;
 
-import net.smartcosmos.dto.relationships.RelationshipCreate;
+import net.smartcosmos.dto.relationships.RelationshipUpsert;
 import net.smartcosmos.dto.relationships.RelationshipLookupSpecific;
 import net.smartcosmos.dto.relationships.RelationshipResponse;
-import net.smartcosmos.dto.relationships.RelationshipUpdateMoniker;
 
 import javax.validation.ConstraintViolationException;
 import java.util.Optional;
@@ -14,13 +13,13 @@ public interface RelationshipDao {
      * Creates a relationship in the realm of a given account.
      *
      * @param accountUrn the account URN
-     * @param relationshipCreate the object to create
+     * @param relationshipUpsert the object to upsert
      * @return an {@link RelationshipResponse} instance for the created object
-     * @throws ConstraintViolationException if the {@link RelationshipCreate} violates constraints enforced by the persistence service
+     * @throws ConstraintViolationException if the {@link RelationshipUpsert} violates constraints enforced by the persistence service
      */
-    RelationshipResponse create(
+    RelationshipResponse upsert(
             String accountUrn,
-            RelationshipCreate relationshipCreate)
+            RelationshipUpsert relationshipUpsert)
         throws ConstraintViolationException;
 
      /**
@@ -54,16 +53,6 @@ public interface RelationshipDao {
      */
     void delete(String accountUrn, String urn) throws IllegalArgumentException;
 
-    /**
-     * Updates the moniker of a relationship
-     *
-     * @param accountUrn
-     * @param relationshipUpdateMoniker
-     * @return an {@link RelationshipResponse} instance for the created object
-     * @throws ConstraintViolationException if the {@link RelationshipCreate} violates constraints enforced by the persistence service
-     */
-    Optional<RelationshipResponse> update(String accountUrn, RelationshipUpdateMoniker relationshipUpdateMoniker)
-        throws ConstraintViolationException;
 
     // TODO: add Look Up All Relationships Between Entities
 
