@@ -6,14 +6,14 @@ import java.lang.reflect.Method;
 
 import static org.junit.Assert.*;
 
-public class RelationshipCreateTest {
+public class RelationshipUpsertTest {
 
     @Test
     public void thatRelationshipCreateVersionIsSet() {
-        RelationshipCreate relationshipCreate = RelationshipCreate.builder().build();
+        RelationshipUpsert relationshipUpsert = RelationshipUpsert.builder().build();
 
-        assertNotNull(relationshipCreate.getVersion());
-        assertEquals(1, relationshipCreate.getVersion());
+        assertNotNull(relationshipUpsert.getVersion());
+        assertEquals(1, relationshipUpsert.getVersion());
     }
 
     /**
@@ -23,7 +23,7 @@ public class RelationshipCreateTest {
     public void thatRelationshipCreateVersionHasNoSetter() {
         Method getVersion = null;
         try {
-            getVersion = RelationshipCreate.class.getDeclaredMethod("setVersion", int.class);
+            getVersion = RelationshipUpsert.class.getDeclaredMethod("setVersion", int.class);
         } catch (NoSuchMethodException e) {
             // that's what we expect
         }

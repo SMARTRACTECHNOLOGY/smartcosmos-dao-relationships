@@ -12,7 +12,7 @@ import java.beans.ConstructorProperties;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @AllArgsConstructor
-public class RelationshipCreate {
+public class RelationshipUpsert {
 
     private static final int VERSION = 1;
 
@@ -29,7 +29,7 @@ public class RelationshipCreate {
     @Builder
     @ConstructorProperties({"entityReferenceType", "referenceUrn", "type",
             "relatedEntityReferenceType", "relatedReferenceUrn", "moniker"})
-    public RelationshipCreate(
+    public RelationshipUpsert(
             String entityReferenceType,
             String referenceUrn,
             String type,
