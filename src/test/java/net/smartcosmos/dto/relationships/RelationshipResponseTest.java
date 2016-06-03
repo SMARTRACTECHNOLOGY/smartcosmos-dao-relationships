@@ -56,4 +56,50 @@ public class RelationshipResponseTest {
 
         assertFalse(jsonObject.has("version"));
     }
+
+    @Test
+    public void thatObjectMapperDoesNotIncludeReciprocalIfNotSet() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        RelationshipResponse relationshipResponse = RelationshipResponse.builder()
+            .accountUrn("accountUrn")
+            .entityReferenceType("entityReferenceType")
+            .referenceUrn("referenceUrn")
+            .relatedEntityReferenceType("relatedEntityReferenceType")
+            .relatedReferenceUrn("relatedReferenceUrn")
+            .lastModifiedTimestamp(123L)
+            .type("type")
+            .urn("urn")
+            .moniker("moniker")
+            .build();
+
+        String jsonString = mapper.writeValueAsString(relationshipResponse);
+        JSONObject jsonObject = new JSONObject(jsonString);
+
+        assertFalse(jsonObject.has("reciprocal"));
+    }
+
+    @Test
+    public void thatObjectMapperIncludeReciprocalIfSet() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        RelationshipResponse relationshipResponse = RelationshipResponse.builder()
+            .accountUrn("accountUrn")
+            .entityReferenceType("entityReferenceType")
+            .referenceUrn("referenceUrn")
+            .relatedEntityReferenceType("relatedEntityReferenceType")
+            .relatedReferenceUrn("relatedReferenceUrn")
+            .lastModifiedTimestamp(123L)
+            .type("type")
+            .urn("urn")
+            .moniker("moniker")
+            .build();
+
+        relationshipResponse.setReciprocal(true);
+
+        String jsonString = mapper.writeValueAsString(relationshipResponse);
+        JSONObject jsonObject = new JSONObject(jsonString);
+
+        assertTrue(jsonObject.has("reciprocal"));
+    }
 }
