@@ -137,9 +137,9 @@ public interface RelationshipDao {
         Boolean checkReciprocal);
 
     /**
-     * Finds all reflexive relationships for a given entity in the realm of a given account.
+     * Finds all symmetric relationships for a given entity in the realm of a given account.
      * <p></p>
-     * A matching set of relationship contains two bidirectional relationships of the same type between reference
+     * A matching set of relationship contains two bi-directional relationships of the same type between reference
      * entity and related reference entity respectively.
      *
      * @param accountUrn the account URN
@@ -147,7 +147,7 @@ public interface RelationshipDao {
      * @param referenceUrn the reference entity's system-assigned URN
      * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
-    List<RelationshipResponse> findAllReflexive(
+    List<RelationshipResponse> findAllSymmetric(
         String accountUrn,
         String entityReferenceType,
         String referenceUrn);
