@@ -121,6 +121,22 @@ public interface RelationshipDao {
         String referenceUrn);
 
     /**
+     * Finds all relationships for a given reference entity in the realm of a given account and includes a
+     * {@code reciprocal} flag in the response if {@code checkReciprocal} is set to {@code true}.
+     *
+     * @param accountUrn the account URN
+     * @param entityReferenceType the entity reference type
+     * @param referenceUrn the reference entity's system-assigned URN
+     * @param checkReciprocal if set to {@code true}, a {@code reciprocal} flag will be set to indicate whether the relationship is reflexive
+     * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
+     */
+    List<RelationshipResponse> findAll(
+        String accountUrn,
+        String entityReferenceType,
+        String referenceUrn,
+        Boolean checkReciprocal);
+
+    /**
      * Finds all reflexive relationships for a given entity in the realm of a given account.
      * <p></p>
      * A matching set of relationship contains two bidirectional relationships of the same type between reference
