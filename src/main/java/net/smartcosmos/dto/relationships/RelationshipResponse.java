@@ -30,7 +30,7 @@ public class RelationshipResponse {
     private final String accountUrn;
     private final Long lastModifiedTimestamp;
     private final String moniker;
-    private final Boolean reciprocal;
+    private Boolean reciprocal;
 
     @Builder
     @ConstructorProperties({"urn", "entityReferenceType", "referenceUrn", "type", "relatedEntityReferenceType", "relatedReferenceUrn", "accountUrn", "lastModifiedTimestamp", "moniker", "reciprocal"})
