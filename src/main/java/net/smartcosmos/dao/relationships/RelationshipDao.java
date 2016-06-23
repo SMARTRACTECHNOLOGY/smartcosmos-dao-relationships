@@ -1,5 +1,6 @@
 package net.smartcosmos.dao.relationships;
 
+import net.smartcosmos.dto.relationships.Page;
 import net.smartcosmos.dto.relationships.RelationshipResponse;
 import net.smartcosmos.dto.relationships.RelationshipCreate;
 
@@ -71,7 +72,7 @@ public interface RelationshipDao {
      * @param size the size of a results page
      * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
-    List<RelationshipResponse> findBetweenEntities(
+    Page<RelationshipResponse> findBetweenEntities(
         String tenantUrn,
         String sourceType,
         String sourceUrn,
@@ -91,7 +92,7 @@ public interface RelationshipDao {
      * @param size the size of a results page
      * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
-    List<RelationshipResponse> findByType(
+    Page<RelationshipResponse> findByType(
         String tenantUrn,
         String sourceType,
         String sourceUrn,
@@ -110,7 +111,7 @@ public interface RelationshipDao {
      * @param size the size of a results page
      * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
-    List<RelationshipResponse> findByTypeReverse(
+    Page<RelationshipResponse> findByTypeReverse(
         String tenantUrn,
         String targetType,
         String targetUrn,
@@ -128,7 +129,7 @@ public interface RelationshipDao {
      * @param size the size of a results page
      * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
-    List<RelationshipResponse> findAll(
+    Page<RelationshipResponse> findAll(
         String tenantUrn,
         String sourceType,
         String sourceUrn,
@@ -146,7 +147,7 @@ public interface RelationshipDao {
      * @param size the size of a results page
      * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
-    List<RelationshipResponse> findAllReverse(
+    Page<RelationshipResponse> findAllReverse(
         String tenantUrn,
         String targetType,
         String targetUrn,
