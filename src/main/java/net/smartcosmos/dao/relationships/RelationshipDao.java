@@ -1,7 +1,7 @@
 package net.smartcosmos.dao.relationships;
 
 import net.smartcosmos.dto.relationships.RelationshipResponse;
-import net.smartcosmos.dto.relationships.RelationshipUpsert;
+import net.smartcosmos.dto.relationships.RelationshipCreate;
 
 import javax.validation.ConstraintViolationException;
 import java.util.List;
@@ -12,143 +12,142 @@ public interface RelationshipDao {
     /**
      * Creates a relationship in the realm of a given account.
      *
-     * @param accountUrn the account URN
-     * @param upsertRelationship the relationship to upsert
+     * @param tenantUrn the account URN
+     * @param createRelationship the relationship to create
      * @return an {@link RelationshipResponse} instance for the created object
-     * @throws ConstraintViolationException if the {@link RelationshipUpsert} violates constraints enforced by the persistence service
+     * @throws ConstraintViolationException if the {@link RelationshipCreate} violates constraints enforced by the persistence service
      */
-    RelationshipResponse upsert(
-            String accountUrn,
-            RelationshipUpsert upsertRelationship)
+    Optional<RelationshipResponse> create(
+            String tenantUrn,
+            RelationshipCreate createRelationship)
         throws ConstraintViolationException;
 
      /**
      * Finds a relationship matching a specified URN in the realm of a given account.
      *
-     * @param accountUrn the account URN
+     * @param tenantUrn the account URN
      * @param urn the relationship's system-assigned URN
      * @return the {@link RelationshipResponse} instance for the retrieved relationship or {@code empty} if the relationship does not exist
      */
-    Optional<RelationshipResponse> findByUrn(String accountUrn, String urn);
+    Optional<RelationshipResponse> findByUrn(String tenantUrn, String urn);
 
     /**
-     * Finds a specific relationship between entities with a specified type in the realm of a given account.
+     * Finds a specific relationship between entities with a specified relationshipType in the realm of a given account.
      *
-     * @param accountUrn the account URN
-     * @param entityReferenceType the entity reference type
-     * @param referenceUrn the reference entity's system-assigned URN
-     * @param relatedEntityReferenceType the entity reference type of the related entity
-     * @param relatedReferenceUrn the related reference entity's system-assigned URN
-     * @param type the relationship type
+     * @param tenantUrn the account URN
+     * @param sourceType the entity reference relationshipType
+     * @param sourceUrn the reference entity's system-assigned URN
+     * @param targetType the entity reference relationshipType of the related entity
+     * @param targetUrn the related reference entity's system-assigned URN
+     * @param relationshipType the relationship relationshipType
      * @return the {@link RelationshipResponse} instance for the retrieved relationship or {@code empty} if the relationship does not exist
      */
     Optional<RelationshipResponse> findSpecific(
-            String accountUrn,
-            String entityReferenceType,
-            String referenceUrn,
-            String relatedEntityReferenceType,
-            String relatedReferenceUrn,
-            String type);
+            String tenantUrn,
+            String sourceType,
+            String sourceUrn,
+            String targetType,
+            String targetUrn,
+            String relationshipType);
 
     /**
      * Deletes a relationship matching a specified URN in the realm of a given account.
      *
-     * @param accountUrn the account URN
+     * @param tenantUrn the account URN
      * @param urn the relationship's system-assigned URN
      * @return a list of {@link RelationshipResponse} instances for the deleted relationship entities
      */
-    List<RelationshipResponse> delete(String accountUrn, String urn);
-
+    List<RelationshipResponse> delete(String tenantUrn, String urn);
 
     /**
      * Finds all relationships between specified entities in the realm of a given account.
      *
-     * @param accountUrn the account URN
-     * @param entityReferenceType the entity reference type
-     * @param referenceUrn the reference entity's system-assigned URN
-     * @param relatedEntityReferenceType the entity reference type of the related entity
-     * @param relatedReferenceUrn the related reference entity's system-assigned URN
+     * @param tenantUrn the account URN
+     * @param sourceType the entity reference relationshipType
+     * @param sourceUrn the reference entity's system-assigned URN
+     * @param targetType the entity reference relationshipType of the related entity
+     * @param targetUrn the related reference entity's system-assigned URN
      * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
     List<RelationshipResponse> findBetweenEntities(
-        String accountUrn,
-        String entityReferenceType,
-        String referenceUrn,
-        String relatedEntityReferenceType,
-        String relatedReferenceUrn);
+        String tenantUrn,
+        String sourceType,
+        String sourceUrn,
+        String targetType,
+        String targetUrn);
 
     /**
-     * Finds all relationships for a given reference entity matching a specified type in the realm of a given account.
+     * Finds all relationships for a given reference entity matching a specified relationshipType in the realm of a given account.
      *
-     * @param accountUrn the account URN
-     * @param entityReferenceType the entity reference type
-     * @param referenceUrn the reference entity's system-assigned URN
-     * @param type the relationship type
+     * @param tenantUrn the account URN
+     * @param sourceType the entity reference relationshipType
+     * @param sourceUrn the reference entity's system-assigned URN
+     * @param relationshipType the relationship relationshipType
      * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
     List<RelationshipResponse> findByType(
-        String accountUrn,
-        String entityReferenceType,
-        String referenceUrn,
-        String type);
+        String tenantUrn,
+        String sourceType,
+        String sourceUrn,
+        String relationshipType);
 
     /**
-     * Finds all reverse relationships related to a given reference entity matching a specified type in the realm of a given account.
+     * Finds all reverse relationships related to a given reference entity matching a specified relationshipType in the realm of a given account.
      *
-     * @param accountUrn the account URN
-     * @param relatedEntityReferenceType the related entity reference type
-     * @param relatedReferenceUrn the related reference entity's system-assigned URN
-     * @param type the relationship type
+     * @param tenantUrn the account URN
+     * @param targetType the related entity reference relationshipType
+     * @param targetUrn the related reference entity's system-assigned URN
+     * @param relationshipType the relationship relationshipType
      * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
     List<RelationshipResponse> findByTypeReverse(
-        String accountUrn,
-        String relatedEntityReferenceType,
-        String relatedReferenceUrn,
-        String type);
+        String tenantUrn,
+        String targetType,
+        String targetUrn,
+        String relationshipType);
 
     /**
      * Finds all relationships for a given reference entity in the realm of a given account.
      *
-     * @param accountUrn the account URN
-     * @param entityReferenceType the entity reference type
-     * @param referenceUrn the reference entity's system-assigned URN
+     * @param tenantUrn the account URN
+     * @param sourceType the entity reference relationshipType
+     * @param sourceUrn the reference entity's system-assigned URN
      * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
     List<RelationshipResponse> findAll(
-        String accountUrn,
-        String entityReferenceType,
-        String referenceUrn);
+        String tenantUrn,
+        String sourceType,
+        String sourceUrn);
 
     /**
      * Finds all relationships for a given reference entity in the realm of a given account and includes a
      * {@code reciprocal} flag in the response if {@code checkReciprocal} is set to {@code true}.
      *
-     * @param accountUrn the account URN
-     * @param entityReferenceType the entity reference type
-     * @param referenceUrn the reference entity's system-assigned URN
+     * @param tenantUrn the account URN
+     * @param sourceType the entity reference relationshipType
+     * @param sourceUrn the reference entity's system-assigned URN
      * @param checkReciprocal if set to {@code true}, a {@code reciprocal} flag will be set to indicate whether the relationship is reflexive
      * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
     List<RelationshipResponse> findAll(
-        String accountUrn,
-        String entityReferenceType,
-        String referenceUrn,
+        String tenantUrn,
+        String sourceType,
+        String sourceUrn,
         Boolean checkReciprocal);
 
     /**
      * Finds all symmetric relationships for a given entity in the realm of a given account.
      * <p></p>
-     * A matching set of relationship contains two bi-directional relationships of the same type between reference
+     * A matching set of relationship contains two bi-directional relationships of the same relationshipType between reference
      * entity and related reference entity respectively.
      *
-     * @param accountUrn the account URN
-     * @param entityReferenceType the entity reference type
-     * @param referenceUrn the reference entity's system-assigned URN
+     * @param tenantUrn the account URN
+     * @param sourceType the entity reference relationshipType
+     * @param sourceUrn the reference entity's system-assigned URN
      * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
     List<RelationshipResponse> findAllSymmetric(
-        String accountUrn,
-        String entityReferenceType,
-        String referenceUrn);
+        String tenantUrn,
+        String sourceType,
+        String sourceUrn);
 }
