@@ -67,6 +67,8 @@ public interface RelationshipDao {
      * @param sourceUrn the reference entity's system-assigned URN
      * @param targetType the entity reference relationshipType of the related entity
      * @param targetUrn the related reference entity's system-assigned URN
+     * @param page the number of the results page
+     * @param size the size of a results page
      * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
     List<RelationshipResponse> findBetweenEntities(
@@ -74,7 +76,9 @@ public interface RelationshipDao {
         String sourceType,
         String sourceUrn,
         String targetType,
-        String targetUrn);
+        String targetUrn,
+        Long page,
+        Integer size);
 
     /**
      * Finds all relationships for a given reference entity matching a specified relationshipType in the realm of a given account.
@@ -83,13 +87,17 @@ public interface RelationshipDao {
      * @param sourceType the entity reference relationshipType
      * @param sourceUrn the reference entity's system-assigned URN
      * @param relationshipType the relationship relationshipType
+     * @param page the number of the results page
+     * @param size the size of a results page
      * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
     List<RelationshipResponse> findByType(
         String tenantUrn,
         String sourceType,
         String sourceUrn,
-        String relationshipType);
+        String relationshipType,
+        Long page,
+        Integer size);
 
     /**
      * Finds all reverse relationships related to a given reference entity matching a specified relationshipType in the realm of a given account.
@@ -98,13 +106,17 @@ public interface RelationshipDao {
      * @param targetType the related entity reference relationshipType
      * @param targetUrn the related reference entity's system-assigned URN
      * @param relationshipType the relationship relationshipType
+     * @param page the number of the results page
+     * @param size the size of a results page
      * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
     List<RelationshipResponse> findByTypeReverse(
         String tenantUrn,
         String targetType,
         String targetUrn,
-        String relationshipType);
+        String relationshipType,
+        Long page,
+        Integer size);
 
     /**
      * Finds all relationships for a given reference entity in the realm of a given account.
@@ -112,42 +124,32 @@ public interface RelationshipDao {
      * @param tenantUrn the account URN
      * @param sourceType the entity reference relationshipType
      * @param sourceUrn the reference entity's system-assigned URN
-     * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
-     */
-    List<RelationshipResponse> findAll(
-        String tenantUrn,
-        String sourceType,
-        String sourceUrn);
-
-    /**
-     * Finds all relationships for a given reference entity in the realm of a given account and includes a
-     * {@code reciprocal} flag in the response if {@code checkReciprocal} is set to {@code true}.
-     *
-     * @param tenantUrn the account URN
-     * @param sourceType the entity reference relationshipType
-     * @param sourceUrn the reference entity's system-assigned URN
-     * @param checkReciprocal if set to {@code true}, a {@code reciprocal} flag will be set to indicate whether the relationship is reflexive
+     * @param page the number of the results page
+     * @param size the size of a results page
      * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
     List<RelationshipResponse> findAll(
         String tenantUrn,
         String sourceType,
         String sourceUrn,
-        Boolean checkReciprocal);
+        Long page,
+        Integer size);
 
     /**
-     * Finds all symmetric relationships for a given entity in the realm of a given account.
-     * <p></p>
-     * A matching set of relationship contains two bi-directional relationships of the same relationshipType between reference
-     * entity and related reference entity respectively.
+     * Finds all relationships for a given reference entity in the realm of a given account and includes a
+     * {@code reciprocal} flag in the response if {@code checkReciprocal} is set to {@code true}.
      *
      * @param tenantUrn the account URN
-     * @param sourceType the entity reference relationshipType
-     * @param sourceUrn the reference entity's system-assigned URN
+     * @param targetType the related entity reference relationshipType
+     * @param targetUrn the related reference entity's system-assigned URN
+     * @param page the number of the results page
+     * @param size the size of a results page
      * @return a list of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
-    List<RelationshipResponse> findAllSymmetric(
+    List<RelationshipResponse> findAllReverse(
         String tenantUrn,
-        String sourceType,
-        String sourceUrn);
+        String targetType,
+        String targetUrn,
+        Long page,
+        Integer size);
 }
