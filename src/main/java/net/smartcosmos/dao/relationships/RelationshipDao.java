@@ -35,11 +35,11 @@ public interface RelationshipDao {
      * Finds a specific relationship between entities with a specified relationshipType in the realm of a given tenant.
      *
      * @param tenantUrn the tenant URN
-     * @param sourceType the entity reference relationshipType
-     * @param sourceUrn the reference entity's system-assigned URN
-     * @param targetType the entity reference relationshipType of the related entity
-     * @param targetUrn the related reference entity's system-assigned URN
-     * @param relationshipType the relationship relationshipType
+     * @param sourceType the source entity type
+     * @param sourceUrn the source entity's system-assigned URN
+     * @param targetType the target entity type
+     * @param targetUrn the target entity's system-assigned URN
+     * @param relationshipType the relationship type
      * @return the {@link RelationshipResponse} instance for the retrieved relationship or {@code empty} if the relationship does not exist
      */
     Optional<RelationshipResponse> findSpecific(
@@ -63,10 +63,10 @@ public interface RelationshipDao {
      * Finds all relationships between specified entities in the realm of a given tenant.
      *
      * @param tenantUrn the tenant URN
-     * @param sourceType the entity reference relationshipType
-     * @param sourceUrn the reference entity's system-assigned URN
-     * @param targetType the entity reference relationshipType of the related entity
-     * @param targetUrn the related reference entity's system-assigned URN
+     * @param sourceType the source entity type
+     * @param sourceUrn the source entity's system-assigned URN
+     * @param targetType the target entity type
+     * @param targetUrn the target entity's system-assigned URN
      * @param page the number of the results page
      * @param size the size of a results page
      * @return a page of matching {@link RelationshipResponse} instances for the retrieved relationships
@@ -77,7 +77,7 @@ public interface RelationshipDao {
         String sourceUrn,
         String targetType,
         String targetUrn,
-        Long page,
+        Integer page,
         Integer size);
 
     /**
@@ -85,9 +85,9 @@ public interface RelationshipDao {
      * given tenant.
      *
      * @param tenantUrn the tenant URN
-     * @param sourceType the entity reference relationshipType
-     * @param sourceUrn the reference entity's system-assigned URN
-     * @param relationshipType the relationship relationshipType
+     * @param sourceType the source entity type
+     * @param sourceUrn the source entity's system-assigned URN
+     * @param relationshipType the relationship type
      * @param page the number of the results page
      * @param size the size of a results page
      * @return a page of matching {@link RelationshipResponse} instances for the retrieved relationships
@@ -97,7 +97,7 @@ public interface RelationshipDao {
         String sourceType,
         String sourceUrn,
         String relationshipType,
-        Long page,
+        Integer page,
         Integer size);
 
     /**
@@ -105,9 +105,9 @@ public interface RelationshipDao {
      * given tenant.
      *
      * @param tenantUrn the tenant URN
-     * @param targetType the related entity reference relationshipType
-     * @param targetUrn the related reference entity's system-assigned URN
-     * @param relationshipType the relationship relationshipType
+     * @param targetType the target entity type
+     * @param targetUrn the target entity's system-assigned URN
+     * @param relationshipType the relationship type
      * @param page the number of the results page
      * @param size the size of a results page
      * @return a page of matching {@link RelationshipResponse} instances for the retrieved relationships
@@ -117,15 +117,15 @@ public interface RelationshipDao {
         String targetType,
         String targetUrn,
         String relationshipType,
-        Long page,
+        Integer page,
         Integer size);
 
     /**
      * Finds all relationships for a given source entity in the realm of a given tenant.
      *
      * @param tenantUrn the tenant URN
-     * @param sourceType the entity reference relationshipType
-     * @param sourceUrn the reference entity's system-assigned URN
+     * @param sourceType the source entity type
+     * @param sourceUrn the source entity's system-assigned URN
      * @param page the number of the results page
      * @param size the size of a results page
      * @return a page of matching {@link RelationshipResponse} instances for the retrieved relationships
@@ -134,15 +134,15 @@ public interface RelationshipDao {
         String tenantUrn,
         String sourceType,
         String sourceUrn,
-        Long page,
+        Integer page,
         Integer size);
 
     /**
      * Finds all relationships for a given target entity in the realm of a given tenant.
      *
      * @param tenantUrn the tenant URN
-     * @param targetType the related entity reference relationshipType
-     * @param targetUrn the related reference entity's system-assigned URN
+     * @param targetType the target entity type
+     * @param targetUrn the target entity's system-assigned URN
      * @param page the number of the results page
      * @param size the size of a results page
      * @return a page of matching {@link RelationshipResponse} instances for the retrieved relationships
@@ -151,14 +151,14 @@ public interface RelationshipDao {
         String tenantUrn,
         String targetType,
         String targetUrn,
-        Long page,
+        Integer page,
         Integer size);
 
     /**
      * Finds all relationships matching a specified relationshipType in the realm of a given tenant.
      *
      * @param tenantUrn the tenant URN
-     * @param relationshipType the relationship relationshipType
+     * @param relationshipType the relationship type
      * @param page the number of the results page
      * @param size the size of a results page
      * @return a page of matching {@link RelationshipResponse} instances for the retrieved relationships
@@ -166,7 +166,7 @@ public interface RelationshipDao {
     Page<RelationshipResponse> findAllByRelationshipType(
         String tenantUrn,
         String relationshipType,
-        Long page,
+        Integer page,
         Integer size);
 
     /**
@@ -174,8 +174,8 @@ public interface RelationshipDao {
      * a given tenant.
      *
      * @param tenantUrn the tenant URN
-     * @param sourceType the entity source relationshipType
-     * @param targetType the entity target relationshipType
+     * @param sourceType the source entity type
+     * @param targetType the target entity type
      * @param page the number of the results page
      * @param size the size of a results page
      * @return a page of matching {@link RelationshipResponse} instances for the retrieved relationships
@@ -184,6 +184,6 @@ public interface RelationshipDao {
         String tenantUrn,
         String sourceType,
         String targetType,
-        Long page,
+        Integer page,
         Integer size);
 }
