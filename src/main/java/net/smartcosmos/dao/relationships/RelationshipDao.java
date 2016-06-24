@@ -153,37 +153,4 @@ public interface RelationshipDao {
         String targetUrn,
         Integer page,
         Integer size);
-
-    /**
-     * Finds all relationships matching a specified relationshipType in the realm of a given tenant.
-     *
-     * @param tenantUrn the tenant URN
-     * @param relationshipType the relationship type
-     * @param page the number of the results page
-     * @param size the size of a results page
-     * @return a page of matching {@link RelationshipResponse} instances for the retrieved relationships
-     */
-    Page<RelationshipResponse> findAllByRelationshipType(
-        String tenantUrn,
-        String relationshipType,
-        Integer page,
-        Integer size);
-
-    /**
-     * Finds all relationships between source entities of sourceType and target entities of tagret type in the realm of
-     * a given tenant.
-     *
-     * @param tenantUrn the tenant URN
-     * @param sourceType the source entity type
-     * @param targetType the target entity type
-     * @param page the number of the results page
-     * @param size the size of a results page
-     * @return a page of matching {@link RelationshipResponse} instances for the retrieved relationships
-     */
-    Page<RelationshipResponse> findAllBetweenTypes(
-        String tenantUrn,
-        String sourceType,
-        String targetType,
-        Integer page,
-        Integer size);
 }
