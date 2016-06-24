@@ -1,24 +1,20 @@
 package net.smartcosmos.dto.relationships;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
-@JsonIgnoreProperties({"version"})
 @Builder
-public class RelationshipResponse {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties({"version"})
+public class RelationshipReference {
 
     private static final int VERSION = 1;
     private final int version = VERSION;
 
-    private final RelationshipReference source;
-
-    private final RelationshipReference target;
-
-    private final String relationshipType;
+    private final String type;
 
     private final String urn;
-
-    private final String tenantUrn;
 }

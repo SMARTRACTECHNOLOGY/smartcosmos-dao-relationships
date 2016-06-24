@@ -3,6 +3,7 @@ package net.smartcosmos.dto.relationships;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
@@ -10,6 +11,23 @@ import java.lang.reflect.Method;
 import static org.junit.Assert.*;
 
 public class RelationshipResponseTest {
+
+    private RelationshipReference source;
+    private RelationshipReference target;
+
+    @Before
+    public void createReferences() {
+        RelationshipReference source = RelationshipReference.builder()
+            .type("sourceType")
+            .urn("sourceUrn")
+            .build();
+
+        RelationshipReference target = RelationshipReference.builder()
+            .type("targetType")
+            .urn("targetUrn")
+            .build();
+    }
+
 
     @Test
     public void thatRelationshipResponseVersionIsSet() {
@@ -38,15 +56,11 @@ public class RelationshipResponseTest {
         ObjectMapper mapper = new ObjectMapper();
 
         RelationshipResponse relationshipResponse = RelationshipResponse.builder()
-            .accountUrn("accountUrn")
-            .entityReferenceType("entityReferenceType")
-            .referenceUrn("referenceUrn")
-            .relatedEntityReferenceType("relatedEntityReferenceType")
-            .relatedReferenceUrn("relatedReferenceUrn")
-            .lastModifiedTimestamp(123L)
-            .type("type")
+            .tenantUrn("tenantUrn")
+            .source(source)
+            .target(target)
+            .relationshipType("relationshipType")
             .urn("urn")
-            .moniker("moniker")
             .build();
 
         assertNotEquals(0, relationshipResponse.getVersion());
@@ -57,20 +71,17 @@ public class RelationshipResponseTest {
         assertFalse(jsonObject.has("version"));
     }
 
+    /* TODO: Remove (reciprocal)
     @Test
     public void thatObjectMapperDoesNotIncludeReciprocalIfNotSet() throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
 
         RelationshipResponse relationshipResponse = RelationshipResponse.builder()
-            .accountUrn("accountUrn")
-            .entityReferenceType("entityReferenceType")
-            .referenceUrn("referenceUrn")
-            .relatedEntityReferenceType("relatedEntityReferenceType")
-            .relatedReferenceUrn("relatedReferenceUrn")
-            .lastModifiedTimestamp(123L)
-            .type("type")
+            .tenantUrn("tenantUrn")
+            .source(source)
+            .target(target)
+            .relationshipType("relationshipType")
             .urn("urn")
-            .moniker("moniker")
             .build();
 
         String jsonString = mapper.writeValueAsString(relationshipResponse);
@@ -84,15 +95,11 @@ public class RelationshipResponseTest {
         ObjectMapper mapper = new ObjectMapper();
 
         RelationshipResponse relationshipResponse = RelationshipResponse.builder()
-            .accountUrn("accountUrn")
-            .entityReferenceType("entityReferenceType")
-            .referenceUrn("referenceUrn")
-            .relatedEntityReferenceType("relatedEntityReferenceType")
-            .relatedReferenceUrn("relatedReferenceUrn")
-            .lastModifiedTimestamp(123L)
-            .type("type")
+            .tenantUrn("tenantUrn")
+            .source(source)
+            .target(target)
+            .relationshipType("relationshipType")
             .urn("urn")
-            .moniker("moniker")
             .build();
 
         relationshipResponse.setReciprocal(true);
@@ -102,4 +109,5 @@ public class RelationshipResponseTest {
 
         assertTrue(jsonObject.has("reciprocal"));
     }
+    */
 }
