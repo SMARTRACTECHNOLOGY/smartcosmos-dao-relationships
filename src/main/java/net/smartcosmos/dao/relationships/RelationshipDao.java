@@ -92,7 +92,7 @@ public interface RelationshipDao {
      * @param size the size of a results page
      * @return a page of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
-    Page<RelationshipResponse> findByType(
+    Page<RelationshipResponse> findByTypeForSource(
         String tenantUrn,
         String sourceType,
         String sourceUrn,
@@ -112,7 +112,7 @@ public interface RelationshipDao {
      * @param size the size of a results page
      * @return a page of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
-    Page<RelationshipResponse> findByTypeReverse(
+    Page<RelationshipResponse> findByTypeForTarget(
         String tenantUrn,
         String targetType,
         String targetUrn,
@@ -130,7 +130,7 @@ public interface RelationshipDao {
      * @param size the size of a results page
      * @return a page of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
-    Page<RelationshipResponse> findAll(
+    Page<RelationshipResponse> findAllForSource(
         String tenantUrn,
         String sourceType,
         String sourceUrn,
@@ -147,7 +147,7 @@ public interface RelationshipDao {
      * @param size the size of a results page
      * @return a page of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
-    Page<RelationshipResponse> findAllReverse(
+    Page<RelationshipResponse> findAllForTarget(
         String tenantUrn,
         String targetType,
         String targetUrn,
