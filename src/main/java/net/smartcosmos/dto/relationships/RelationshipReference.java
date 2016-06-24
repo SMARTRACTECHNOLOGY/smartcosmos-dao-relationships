@@ -9,11 +9,9 @@ import lombok.Data;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties({"version"})
-
 public class RelationshipReference {
 
     private static final int VERSION = 1;
-
     private final int version = VERSION;
 
     private final String type;
