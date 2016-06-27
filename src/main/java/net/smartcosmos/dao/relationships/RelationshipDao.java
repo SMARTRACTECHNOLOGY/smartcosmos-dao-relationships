@@ -69,6 +69,8 @@ public interface RelationshipDao {
      * @param targetUrn the target entity's system-assigned URN
      * @param page the number of the results page
      * @param size the size of a results page
+     * @param sortOrder order to sort the result, can be {@code ASC} or {@code DESC}
+     * @param sortBy name of the field to sort by
      * @return a page of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
     Page<RelationshipResponse> findBetweenEntities(
@@ -78,7 +80,9 @@ public interface RelationshipDao {
         String targetType,
         String targetUrn,
         Integer page,
-        Integer size);
+        Integer size,
+        SortOrder sortOrder,
+        String sortBy);
 
     /**
      * Finds all relationships for a given source entity matching a specified relationshipType in the realm of a
@@ -90,6 +94,8 @@ public interface RelationshipDao {
      * @param relationshipType the relationship type
      * @param page the number of the results page
      * @param size the size of a results page
+     * @param sortOrder order to sort the result, can be {@code ASC} or {@code DESC}
+     * @param sortBy name of the field to sort by
      * @return a page of matching {@link RelationshipResponse} instances for the retrieved relationships
      */
     Page<RelationshipResponse> findByTypeForSource(
@@ -98,7 +104,9 @@ public interface RelationshipDao {
         String sourceUrn,
         String relationshipType,
         Integer page,
-        Integer size);
+        Integer size,
+        SortOrder sortOrder,
+        String sortBy);
 
     /**
      * Finds all relationships related to a given target entity matching a specified relationshipType in the realm of a
@@ -118,7 +126,9 @@ public interface RelationshipDao {
         String targetUrn,
         String relationshipType,
         Integer page,
-        Integer size);
+        Integer size,
+        SortOrder sortOrder,
+        String sortBy);
 
     /**
      * Finds all relationships for a given source entity in the realm of a given tenant.
@@ -135,7 +145,9 @@ public interface RelationshipDao {
         String sourceType,
         String sourceUrn,
         Integer page,
-        Integer size);
+        Integer size,
+        SortOrder sortOrder,
+        String sortBy);
 
     /**
      * Finds all relationships for a given target entity in the realm of a given tenant.
@@ -152,5 +164,7 @@ public interface RelationshipDao {
         String targetType,
         String targetUrn,
         Integer page,
-        Integer size);
+        Integer size,
+        SortOrder sortOrder,
+        String sortBy);
 }
