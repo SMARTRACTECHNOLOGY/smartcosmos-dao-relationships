@@ -12,17 +12,17 @@ public class SortOrderTest {
     }
 
     @Test
-    public void thatParseAscUpperReturnsDec() {
+    public void thatParseAscUpperReturnsAsc() {
         assertEquals(SortOrder.ASC, SortOrder.parseSortOrder("ASC"));
     }
 
     @Test
-    public void thatParseDescLowerReturnsAsc() {
+    public void thatParseDescLowerReturnsDesc() {
         assertEquals(SortOrder.DESC, SortOrder.parseSortOrder("desc"));
     }
 
     @Test
-    public void thatParseDecUpperReturnsDec() {
+    public void thatParseDecUpperReturnsDesc() {
         assertEquals(SortOrder.DESC, SortOrder.parseSortOrder("desc"));
     }
 
