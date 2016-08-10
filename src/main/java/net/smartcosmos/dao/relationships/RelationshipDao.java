@@ -1,12 +1,12 @@
 package net.smartcosmos.dao.relationships;
 
-import net.smartcosmos.dto.relationships.Page;
-import net.smartcosmos.dto.relationships.RelationshipResponse;
-import net.smartcosmos.dto.relationships.RelationshipCreate;
-
-import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.ConstraintViolationException;
+
+import net.smartcosmos.dto.relationships.Page;
+import net.smartcosmos.dto.relationships.RelationshipCreate;
+import net.smartcosmos.dto.relationships.RelationshipResponse;
 
 public interface RelationshipDao {
 
@@ -22,7 +22,7 @@ public interface RelationshipDao {
         String tenantUrn,
         RelationshipCreate createRelationship) throws ConstraintViolationException;
 
-     /**
+    /**
      * Finds a relationship matching a specified URN in the realm of a given tenant.
      *
      * @param tenantUrn the tenant URN
