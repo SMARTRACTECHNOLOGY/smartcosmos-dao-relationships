@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@JsonIgnoreProperties({"version"})
+@JsonIgnoreProperties({ "version" })
 @Builder
 public class RelationshipResponse {
 

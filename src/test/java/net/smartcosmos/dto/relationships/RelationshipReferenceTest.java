@@ -2,16 +2,17 @@ package net.smartcosmos.dto.relationships;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
-import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
+import org.json.JSONObject;
+import org.junit.*;
+
+import static org.junit.Assert.*;
 
 public class RelationshipReferenceTest {
 
     @Test
     public void thatObjectMapperIgnoresVersion() throws JsonProcessingException {
+
         ObjectMapper mapper = new ObjectMapper();
 
         RelationshipReference reference = RelationshipReference.builder()

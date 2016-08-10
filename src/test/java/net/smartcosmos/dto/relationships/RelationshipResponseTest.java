@@ -1,12 +1,12 @@
 package net.smartcosmos.dto.relationships;
 
+import java.lang.reflect.Method;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
-import org.junit.Before;
-import org.junit.Test;
 
-import java.lang.reflect.Method;
+import org.json.JSONObject;
+import org.junit.*;
 
 import static org.junit.Assert.*;
 
@@ -17,6 +17,7 @@ public class RelationshipResponseTest {
 
     @Before
     public void createReferences() {
+
         RelationshipReference source = RelationshipReference.builder()
             .type("sourceType")
             .urn("sourceUrn")
@@ -28,10 +29,11 @@ public class RelationshipResponseTest {
             .build();
     }
 
-
     @Test
     public void thatRelationshipResponseVersionIsSet() {
-        RelationshipResponse relationshipResponse = RelationshipResponse.builder().build();
+
+        RelationshipResponse relationshipResponse = RelationshipResponse.builder()
+            .build();
 
         assertNotEquals(0, relationshipResponse.getVersion());
         assertEquals(1, relationshipResponse.getVersion());
@@ -42,6 +44,7 @@ public class RelationshipResponseTest {
      */
     @Test
     public void thatRelationshipResponseVersionHasNoSetter() {
+
         Method getVersion = null;
         try {
             getVersion = RelationshipResponse.class.getDeclaredMethod("setVersion", int.class);
@@ -53,6 +56,7 @@ public class RelationshipResponseTest {
 
     @Test
     public void thatObjectMapperIgnoresVersion() throws JsonProcessingException {
+
         ObjectMapper mapper = new ObjectMapper();
 
         RelationshipResponse relationshipResponse = RelationshipResponse.builder()

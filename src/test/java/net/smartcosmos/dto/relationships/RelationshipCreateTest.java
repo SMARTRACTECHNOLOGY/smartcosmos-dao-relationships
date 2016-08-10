@@ -1,18 +1,18 @@
 package net.smartcosmos.dto.relationships;
 
-import org.junit.Test;
-
 import java.lang.reflect.Method;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import org.junit.*;
+
+import static org.junit.Assert.*;
 
 public class RelationshipCreateTest {
 
     @Test
     public void thatRelationshipCreateVersionIsSet() {
-        RelationshipCreate relationshipCreate = RelationshipCreate.builder().build();
+
+        RelationshipCreate relationshipCreate = RelationshipCreate.builder()
+            .build();
 
         assertNotNull(relationshipCreate.getVersion());
         assertEquals(1, relationshipCreate.getVersion());
@@ -23,6 +23,7 @@ public class RelationshipCreateTest {
      */
     @Test
     public void thatRelationshipCreateVersionHasNoSetter() {
+
         Method getVersion = null;
         try {
             getVersion = RelationshipCreate.class.getDeclaredMethod("setVersion", int.class);
