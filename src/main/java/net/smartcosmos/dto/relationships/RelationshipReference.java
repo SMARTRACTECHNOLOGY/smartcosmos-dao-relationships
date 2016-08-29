@@ -17,4 +17,7 @@ public class RelationshipReference {
     private final String type;
 
     private final String urn;
+
+    private final String tenantUrn;
+
 }
